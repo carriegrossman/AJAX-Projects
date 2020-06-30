@@ -1,26 +1,20 @@
-const ajax = (url, callback) =>{
-    const request = new XMLHttpRequest();
+const request = new XMLHttpRequest();
 
 request.onreadystatechange =() => {
-    if(request.readyState === 4 && request.status == 200){
-        callback(request.response)
+    if(request.readyState === 4 && request.status ===200){
+        console.log(request.response)
+        console.log(JSON.parse(request.response))
 
         let names = JSON.parse(request.response)
         let doc = document.querySelector("body")
-        let newList = document.createElement('ul')
-            doc.append(newList)
 
-
-
-
-
-
-
+        names.forEach(name => {
+            let nameDom = document.createElement("div")
+            nameDom.innerHTML = name.name;
+            doc.append(nameDom)
+        });
     }
 };
-request.open("GET", url);
-
+//GET method is the same as doing opening a webpage (Http methods)
+request.open("GET", "./starwars_names.json")
 request.send();
-
-}
-ajax("./starwars_names.json", (resp)=>console.log(JSON.parse(resp)))

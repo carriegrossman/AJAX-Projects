@@ -13,23 +13,15 @@ const addNames=(response) =>{
             let details = document.createElement("div")
             details.append(name.eye_color, name.height, name.mass)
             listItems.append(details)
+
         });
         
-        // nameDom.innerText = name.name;
-            // doc.append(nameDom)
 }
 const request = new XMLHttpRequest();
 
 request.onreadystatechange =() => {
     if(request.readyState === 4 && request.status ===200){
         addNames(request.response)
-
-        
-
-
-        
-
-        
 
     }
 };

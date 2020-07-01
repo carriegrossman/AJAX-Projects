@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <script>
+        const ajax = (url, callback) =>{
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = () => {
+                if(request.readyState === 4 && request.status === 200){
+                    callback(request.response)
+
+                    let users = JSON.parse(request.response)
+                    let doc = document.querySelector('body')
+                    let newList = document.createElement('ul')
+                    doc.append(newList)
+
+                    users.forEach(user => {
+                        console.log(user)
+            });
+                };
+            }
+            request.open("GET", url);
+
+            request.send();
+        }
+
+        ajax("https://swapi.dev/api/films/", (resp)=>console.log(JSON.parse(resp)));
+
+        
+    </script>
+</body>
+</html>
